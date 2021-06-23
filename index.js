@@ -23,18 +23,29 @@ function addMovie(event) {
 
 function deleteMovie(event) {
     event.target.parentNode.remove();
-    message.textContent = "Movie deleted!";
+    event.target.textContent = "";
+    message.textContent = `${event.target.parentNode.textContent} deleted!`;
+    revealMessage();
 }
 
 function crossOffMovie(event) {
     event.target.classList.toggle("checked");
-    console.log(event);
 
     if (event.target.classList.contains("checked")) {
-        message.textContent = "Movie watched!";
+        message.textContent = `${event.target.textContent} has been watched!`;
     } else {
-        message.textContent = "Movie added back!";
+        message.textContent = `${event.target.textContent} has been added back!`;
     }
+    
+    revealMessage();
+}
+
+function revealMessage() {
+    message.classList.remove("hide");
+
+    setTimeout(function() {
+        message.classList.add("hide");
+    }, 1000);
 }
 
 document.querySelector("form").addEventListener("submit", addMovie);
